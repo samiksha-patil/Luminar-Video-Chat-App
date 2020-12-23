@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.min.css">
+</head>
+<body>
+   <div class="centered-form">
+       <div class="centered-form__box">
+           <h1> Join </h1>
+          
+
+               <div id="center">
+                <input type="text" id="username" placeholder="Username">
+                <input type="text" id="name" placeholder="name">
+                <button onclick="location.href= document.getElementById('username').value +'/'+ document.getElementById('name').value " id="connect">EnterRoom</button>
+          </div>
+          <button onclick="location.href= uuidv4()" id="connect">New Meeting</button>
+           </form>
+       </div>
+   </div>
+
+
+</body>
+
+</html>
+
+<script>
+    function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+</script>
