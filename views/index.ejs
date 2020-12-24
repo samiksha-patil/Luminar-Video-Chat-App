@@ -1,26 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Chat App</title>
-    <link rel="icon" href="/img/favicon.png">
-    <link rel="stylesheet" href="/css/styles.min.css">
-</head>
-<body>
-   <div class="centered-form">
-       <div class="centered-form__box">
-           <h1> Join </h1>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">    
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        
           
+     <link rel="stylesheet" href="styles.css">
+        <style>
 
-               <div id="center">
-                <input type="text" id="username" placeholder="Username">
-                <input type="text" id="name" placeholder="name">
-                <button onclick="location.href= document.getElementById('username').value +'/'+ document.getElementById('name').value " id="connect">EnterRoom</button>
+        </style>
+    </head>
+    <body>
+        <nav class="navbar nav-l navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <img class="mt-2" src="../luminar_logo.jpeg" height="50px">
+            </div>
+          </nav>
+
+
+          <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen"><i class="fas fa-video"></i> &nbsp; Join Meeting</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')"><i class="fas fa-plus"></i> &nbsp; Create Meeting</button>
+            
           </div>
-          <button onclick="location.href= uuidv4()" id="connect">New Meeting</button>
-           </form>
-       </div>
-   </div>
+          
+          <div id="London" class="tabcontent">
+            <div class="container-bg" >
+                <div class="card">
+                    <div class="head-title">Join Meeting</div>
+                    <input class="input-box mt-4" type="text"  id="name"  placeholder="Name">
+                    <input class="input-box mt-4" type="text" id="code" placeholder="Enter Code">
 
+                    <button class="btn-yellow " onclick="location.href= document.getElementById('name').value +'/'+ document.getElementById('code').value " id="connect">Join</button>
+         
+
+
+                    
+                </div>
+            
+            </div>
+                               
+<svg class="shape" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffe793" fill-opacity="1" d="M0,160L48,138.7C96,117,192,75,288,85.3C384,96,480,160,576,202.7C672,245,768,267,864,245.3C960,224,1056,160,1152,128C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+
+          </div>
+          
+          <div id="Paris" class="tabcontent">
+            <div class="container-bg">
+                <div class="card" style="height:250px;">
+                    <div class="head-title">Create Meeting</div>
+                    <input class="input-box mt-4" id="iname" type="text" placeholder="Name">                  
+                   
+                    <button class="btn-yellow" onclick="location.href=  document.getElementById('iname').value +'/' + uuidv4()" id="connect">Create</button>
+                </div>
+            
+            </div>
+            <svg class="shape" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffdf71" fill-opacity="1" d="M0,160L60,133.3C120,107,240,53,360,64C480,75,600,149,720,192C840,235,960,245,1080,218.7C1200,192,1320,128,1380,96L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+            <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f8d55d" fill-opacity="1" d="M0,160L60,133.3C120,107,240,53,360,64C480,75,600,149,720,192C840,235,960,245,1080,218.7C1200,192,1320,128,1380,96L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+          </div>
+          
+          
+      
+ <script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
+</body>
+</html>
 
 </body>
 
