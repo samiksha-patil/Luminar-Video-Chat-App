@@ -15,9 +15,10 @@ app.get('/', (req, res) => {
   res.render('index.ejs')
   })
 
+  app.get('/:name/:room', (req, res) => {
 
-  app.get('/:room', (req, res) => {
-    res.render('room', { roomId: req.params.room })
+    res.render('room', { roomId: req.params.room, name:req.params.name })
+    
   })
   
   io.on('connection', socket => {
