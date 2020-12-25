@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script>
+    const ROOM_ID = "<%= roomId %>"
+    const NAME = "<%= name %>"
+  </script>
+
+  <script defer src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">    
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  
+
+  
+<script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="../../script.js" defer></script>
+
+       <link rel="stylesheet" href="../public/styles.css">
+</head>
+<body>
+
+
+
+
+  <nav class="navbar nav-l navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <img class="mt-2" src="../luminar_logo.jpeg" height="50px">
+    </div>
+    
+  <!-- Button trigger modal -->
+<button type="button" class="btn-yellow" style="width:150px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Share Code
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Share this code to join this meet!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="div1"><%= roomId %></div> 
+      </div>
+      <div class="modal-footer">
+  
+        <button class="btn-yellow" id="button1" onclick="CopyToClipboard('div1')" onmouseout="outFunc()">
+      
+          copy</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+</nav>
+  
+  <div class="tabcontent">
+    <div class="container-bg" >
+        
+  
+  <div id="video-grid"></div>
+ 
+
+
+</div>
+    
+    </div>
+  
+
+  
+  
+
+
+</div>
+
+
+ 
+</div>
+</div>
+
+
+<script>
+
+function CopyToClipboard(containerid) {
+  if (document.selection) {
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById(containerid));
+    range.select().createTextRange();
+    document.execCommand("copy");
+    var toolhtip = document.getElementById("mytoolhtip");
+  toolhtip.innerHTML = "Copied" ;
+  } else if (window.getSelection) {
+    var range = document.createRange();
+    range.selectNode(document.getElementById(containerid));
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+     var toolhtip = document.getElementById("mytoolhtip");
+  toolhtip.innerHTML = "Copied" ;
+   
+  }
+}
+function outFunc() {
+  var toolhtip = document.getElementById("mytoolhtip");
+  toolhtip.innerHTML = "Copy to clipboard";
+}
+</script>
+
+
+
+</body>
+</html>
