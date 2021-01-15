@@ -457,7 +457,546 @@ function outFunc() {
 }
 </script>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script>
+    const ROOM_ID = "<%= roomId %>"
+    const NAME = "<%= name %>"
+  </script>
 
+  <script defer src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">    
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  
+
+  
+<script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="../../script.js" defer></script>
+  <title>Document</title>
+  <style>
+   body {
+  padding: 0;
+  margin: 0;
+}
+
+#video-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+video {
+  height: 300px;
+  width: 400px;
+  object-fit: cover;
+  padding: 8px;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+}
+
+.main__left {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+}
+
+.main__right {
+  flex: 0.2;
+}
+
+.main__videos {
+  flex-grow: 1;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__controls {
+ 
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  width:80vw;
+  position: fixed;
+  max-width: 700px;
+  margin: auto;
+  border-radius: 1000px 1000px 100px 100px;
+  background-color: #ffdf71;
+}
+
+.main__controls__block {
+  display: flex;
+}
+
+.main__controls__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+    height: 65px;
+    cursor: pointer;
+    position: relative;
+    background: white;
+    border: 1px solid white;
+    border-radius: 65px;
+    margin: 5px;
+  cursor: pointer;
+}
+
+
+
+.main__controls__button i {
+  font-size: 24px;
+}
+
+.leave_meeting {
+  color: #eb534b;
+}
+
+.main__right {
+  display: flex;
+  flex-direction: column;
+  background-color:#ecf1f8;
+}
+
+.main__header {
+  padding-top: 5px;
+  color: #333333;
+  text-align: center;
+}
+
+.main__chat_window {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.messages {
+  color: #333333;
+  list-style: none;
+
+}
+.message{
+  padding: 10px 20px;
+    color: #333333;
+    list-style: none;
+    background-color:#ecf1f8;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+ul{
+  padding: 0px;
+  margin:0px;
+}
+
+.unmute,
+.stop {
+  color: #cc3b33;
+}
+
+
+.messages {
+  color: white;
+  list-style: none;
+}
+
+.main__message_container {
+  padding: 22px 10px;
+  display: flex;
+}
+
+.main__message_container input {
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  color: #333333;
+  padding: 5px;
+  background-color:#ecf1f8;
+  height:40px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.main__message_container input:focus {
+  outline: 0;
+}
+li{
+  list-style: none;
+}
+.main__right {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+    height: 100%;
+    padding: 10px;
+    border-radius: 20px;
+
+}
+.toolhtip {
+     position: relative;
+     display: inline-block;
+   }
+   
+   .toolhtip .toolhtiptext {
+     visibility: hidden;
+     width: 140px;
+     background-color: #555;
+     color: #fff;
+     text-align: center;
+     border-radius: 6px;
+     padding: 5px;
+     position: absolute;
+     z-index: 1;
+     bottom: 150%;
+     left: 50%;
+     margin-left: -75px;
+     opacity: 0;
+     transition: opacity 0.3s;
+   }
+   
+   .toolhtip .toolhtiptext::after {
+     content: "";
+     position: absolute;
+     top: 100%;
+     left: 50%;
+     margin-left: -5px;
+     border-width: 5px;
+     border-style: solid;
+     border-color: #555 transparent transparent transparent;
+   }
+   
+   .toolhtip:hover .toolhtiptext {
+     visibility: visible;
+     opacity: 1;
+   }
+
+
+   .container-bg{
+    background-color: #ecf1f8;
+    height:90vh;
+    width: 100%;
+}
+.card{
+    background-color: white;
+    height:350px;
+    width: 300px;
+    box-shadow: 4px 4px 80px 6px rgba(0, 0, 0, 0.17);
+    border-radius: 54px;
+    padding: 50px 50px 20px 50px;
+}
+.head-title{
+    text-align: center;
+    font-size: x-large;              
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.input-box{
+    background-color: #ecf1f8;
+    border-radius: 10px;
+    height: 40px;
+    border: none;  
+    padding: 15px;            
+}
+.input-box:focus{
+    outline: 0;           
+}
+.btn-yellow{
+    background-color: #333333;
+    color:#ecf1f8;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    margin:auto;
+    z-index: 8;
+}
+.btn-yellow:focus,.btn-yellow:hover{
+    outline:0;
+    background-color: #ffe382;
+    color: #333333;
+}
+.nav-l{
+    height:10vh;
+    padding: 15px;
+   
+    justify-content: center;
+}
+.tab {
+float: left;
+width: 20%;
+background-color: #eaf1f8 !important;
+    padding: 20px;
+    height: 90vh;
+
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+display: block;
+background-color: inherit;
+color: black;
+padding: 22px 16px;
+width: 100%;
+border: none;
+outline: none;
+text-align: left;
+cursor: pointer;
+transition: 0.3s;
+font-size: 17px;
+margin-top: 15px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+background-color: #ddd;
+border-radius: 0px 18px 18px 0px;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+background-color: #333333 !important;
+border-radius: 0px 18px 18px 0px;
+color: white
+}
+
+/* Style the tab content */
+.tabcontent {
+float: left;
+width: 80%;
+border-left: none;
+
+}
+.shape{
+position: fixed;
+bottom:0px;
+overflow: hidden;
+width:80%;
+height: auto;
+
+}
+.red-bt{
+  background-color: #eb534b;
+  border-radius: 15px;
+  height: 70px;
+  width: 70px;
+  border: 2px solid  #eb534b;
+
+
+}
+  </style>
+       <link rel="stylesheet" href="../public/styles.css">
+</head>
+<body>
+
+
+
+
+  <nav class="navbar nav-l navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <img class="mt-2" src="../luminar_logo.jpeg" height="50px">
+    </div>
+    
+  <!-- Button trigger modal -->
+<button type="button" class="btn-yellow" style="width:150px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Share Code
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Share this code to join this meet!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="div1"><%= roomId %></div> 
+      </div>
+      <div class="modal-footer">
+  
+        <button class="btn-yellow" id="button1" onclick="CopyToClipboard('div1')" onmouseout="outFunc()">
+      
+          copy</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+   
+    
+  <!-- <div class="toolhtip">
+    <button id="button1" onclick="CopyToClipboard('div1')" onmouseout="outFunc()">
+    <span class="toolhtiptext" id="mytoolhtip">Copy to clipboard</span>
+    copy</button></div> -->
+</nav>
+  
+  <div class="tabcontent">
+    <div class="container-bg" >
+        
+  
+  <div id="video-grid"></div>
+ 
+
+  
+  <!-- <svg class="shape" width="1322" height="104" viewBox="0 0 1322 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1321.31 103H1.35094C2.2239 95.4319 3.57254 85.3007 5.54472 71.9106C18.0203 -12.7921 1292.02 -32.3633 1315.04 72.9103C1317.72 85.1263 1319.77 95.0323 1321.31 103Z" fill="#FFDF71"/>
+    <path d="M1321.31 103V103.5H1321.91L1321.8 102.905L1321.31 103ZM1.35094 103L0.85423 102.943L0.789947 103.5H1.35094V103ZM5.54472 71.9106L6.03938 71.9834L6.03938 71.9834L5.54472 71.9106ZM1315.04 72.9103L1315.53 72.8035L1315.53 72.8035L1315.04 72.9103ZM1321.31 102.5H1.35094V103.5H1321.31V102.5ZM1.84764 103.057C2.71979 95.4963 4.06763 85.3706 6.03938 71.9834L5.05006 71.8377C3.07744 85.2308 1.728 95.3676 0.85423 102.943L1.84764 103.057ZM6.03938 71.9834C6.40627 69.4925 7.94083 67.0066 10.6693 64.5328C13.3966 62.06 17.2814 59.6322 22.2689 57.2581C32.2429 52.5104 46.5388 48.0186 64.5636 43.8036C100.607 35.3752 151.46 28.0762 212.229 22.0263C333.76 9.92707 494.883 2.82997 656.342 1.66932C817.802 0.508673 979.581 5.28464 1102.43 16.9283C1163.86 22.7504 1215.53 30.2879 1252.56 39.6529C1271.07 44.3361 1285.9 49.4701 1296.45 55.0617C1307.02 60.668 1313.17 66.6673 1314.56 73.0171L1315.53 72.8035C1314.04 65.9941 1307.54 59.8095 1296.91 54.1782C1286.26 48.5321 1271.35 43.3747 1252.8 38.6834C1215.7 29.2996 1163.97 21.7564 1102.52 15.9327C979.629 4.28469 817.812 -0.491431 656.335 0.669351C494.856 1.83014 333.701 8.92799 212.13 21.0312C151.347 27.0825 100.442 34.3866 64.3359 42.8299C46.2858 47.0508 31.9089 51.5619 21.8391 56.3552C16.8046 58.7516 12.8246 61.2288 9.99765 63.7919C7.17196 66.3539 5.46289 69.0348 5.05006 71.8377L6.03938 71.9834ZM1314.56 73.0171C1317.23 85.2304 1319.28 95.1323 1320.82 103.095L1321.8 102.905C1320.26 94.9323 1318.21 85.0221 1315.53 72.8035L1314.56 73.0171Z" fill="#FCF3F3"/>
+    </svg> -->
+    
+<!-- 
+  <svg class="shape" viewBox="0 0 1617 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1616 114.89C943.579 -42.8311 592.708 -30.98 1 114.89V190H1616V114.89Z" fill="#FFDF71" stroke="#FFDF71"/>
+    </svg> -->
+    
+  <div class="main__controls">
+    
+
+    <div class="main__controls__block mr-4">
+      <div
+      onclick="muteUnmute()"
+      class="main__controls__button main__mute_button"
+    >
+      <i class="fas fa-microphone"></i>
+      
+    </div>
+    <div
+        onclick="playStop()"
+        class="main__controls__button main__video_button ml-4">
+        <i class="fas fa-video"></i>
+        
+      </div>
+      <div onclick="lea()" class="main__controls__button red-bt">
+        <span class="leave_meeting"><svg width="50" height="34" viewBox="0 0 127 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M125.258 30.4911C118.042 13.4601 52.7733 -26.3552 1.63201 30.4911C1.26658 32.7494 0.414029 34.7701 1.63203 36.553L15.639 51.8861C22.338 56.0462 29.7677 47.3693 32.4472 45.2298C35.1268 43.0903 41.5823 40.7132 43.0439 36.553C44.5054 32.3929 44.2618 21.2199 44.2618 21.2199C61.7948 16.4856 69.975 17.1887 81.2888 21.2199L83.8465 36.553C89.0324 41.5544 91.0479 42.7691 94.8085 45.2298C104.874 53.591 106.808 52.9807 110.234 51.8998L110.277 51.8861C110.277 51.8861 122.579 38.9303 123.919 36.553C125.258 34.1758 127.022 32.7854 125.258 30.4911Z" fill="#FAFCFF" stroke="#FAFCFF"/>
+          </svg>
+          </span>
+      </div>
+    
+    </div>
+
+    <div class="main__controls__block">
+     
+      <button class="main__controls__button" onclick="openparticipant(event)" class="main__controls__button">
+        <i class="fas fa-user-friends"></i>
+        
+      </button>
+      <button class="main__controls__button" onclick="openchat(event)"  id="defaultOpen" class="main__controls__button">
+        <i class="fas fa-comment-alt"></i>
+       
+      </button>
+    </div>
+   
+  </div>
+</div>
+    
+    </div>
+  
+
+  
+  <div class="tab">
+    <div id="chat" class="main__right">
+      <!-- chat -->
+      <div class="main__header">
+        <h3>Chat</h3>
+      </div>
+      <div class="main__chat_window">
+        <ul class="messages"></ul>
+      </div>
+      <div class="main__message_container">
+        <input
+          id="chat_message"
+          type="text"
+          placeholder="Type message here..."
+        />
+      </div>
+    </div>
+   </div>
+  </div> 
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+</div>
+</div>
+
+
+
+<script>
+
+function CopyToClipboard(containerid) {
+  if (document.selection) {
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById(containerid));
+    range.select().createTextRange();
+    document.execCommand("copy");
+    var toolhtip = document.getElementById("mytoolhtip");
+  toolhtip.innerHTML = "Copied" ;
+  } else if (window.getSelection) {
+    var range = document.createRange();
+    range.selectNode(document.getElementById(containerid));
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+     var toolhtip = document.getElementById("mytoolhtip");
+  toolhtip.innerHTML = "Copied" ;
+   
+  }
+}
+function outFunc() {
+  var toolhtip = document.getElementById("mytoolhtip");
+  toolhtip.innerHTML = "Copy to clipboard";
+}
+</script>
+
+<script>
+  function lea() {
+  location.href='/'
+  }
+ 
+  function openchat(evt) {
+
+document.getElementById('chat').style.display = "flex";
+document.getElementById('participant').style.display = "none";
+evt.currentTarget.className += " active";
+}
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  </script>
+
+</body>
+</html>
 
 </body>
 </html>
