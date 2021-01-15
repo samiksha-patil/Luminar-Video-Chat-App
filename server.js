@@ -4,7 +4,7 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 //const { v1: uuidV1 } = require('uuid')
-
+const port = process.env.PORT || 3000
 const users= []
 
 const publicDirectoryPath = path.join(__dirname, 'public')
@@ -51,4 +51,4 @@ app.get('/', (req, res) => {
   })
   
 
-server.listen(3000)
+server.listen(port)
