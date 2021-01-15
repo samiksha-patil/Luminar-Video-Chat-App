@@ -18,9 +18,7 @@ app.get('/', (req, res) => {
   })
 
 
-  app.get('/abc', (req, res) => {
-    res.sendFile(publicDirectoryPath+'//board.html')
-    })
+ 
 
 
   app.get('/:name/:room', (req, res) => {
