@@ -81,19 +81,6 @@ socket.on("participants", (name,users,roomId) => {
 });
 
 
-socket.on("createMessage", (message,name) => {
-  $("ul").append(`<li class="message"><b>${name}</b/><br/>${message}</li>`);
-  console.log("yy")
-  scrollToBottom();
-});
-
-
-const scrollToBottom = () => {
-  let d = $(".main__chat_window");
-  d.scrollTop(d.prop("scrollHeight"));
-};
-
-
 
 
 //Mute our video
@@ -151,3 +138,28 @@ const setPlayVideo = () => {
   `;
   document.querySelector(".main__video_button").innerHTML = html;
 };
+
+
+let text = $("input");
+console.log(text);
+
+$("html").keydown((e) => {
+  if (e.which == 13 && text.val().length !== 0) {
+    console.log(text.val());
+    socket.emit("message", text.val());
+    text.val("");
+  }
+});
+
+socket.on("createMessage", (message,name) => {
+  $("ul").append(`<li class="message"><b>${name}</b/><br/>${message}</li>`);
+  console.log("yy")
+  scrollToBottom();
+});
+
+
+const scrollToBottom = () => {
+  let d = $(".main__chat_window");
+  d.scrollTop(d.prop("scrollHeight"));
+};
+
