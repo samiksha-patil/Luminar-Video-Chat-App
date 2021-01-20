@@ -1,7 +1,7 @@
 # Luminar
 A realtime video Chat app using nodejs, socket.io and webRTC
 <p align="center">
-  <img src="https://github.com/samiksha-patil/Luminar/blob/master/public/luminar_logo.jpeg" alt="Logo" height="100">
+  <img src="https://github.com/samiksha-patil/Luminar/blob/master/public/luminar_logo.svg" height="100">
 
   <p align="center">
     A realtime video Chat app using nodejs, socket.io and webRTC
