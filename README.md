@@ -18,7 +18,9 @@
 </p>
 
 ## About the Project
- <img src="https://github.com/samiksha-patil/Luminar/blob/master/gif/Luminar.gif" max-height="500">
+https://lumiar-video-chat-app.herokuapp.com/
+
+ <img src="https://github.com/samiksha-patil/Luminar/blob/master/gif/Luminar.gif">
 
 ## Features
 
@@ -42,8 +44,6 @@
 - CSS
 - jQuery
 - Javascript
-
-## Build Instructions
 
 ## Show your support
 Give a :star: if you like this project
