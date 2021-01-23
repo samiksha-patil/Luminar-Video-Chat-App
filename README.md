@@ -18,6 +18,7 @@
 </p>
 
 ## About the Project
+ <img src="https://github.com/samiksha-patil/Luminar/blob/master/gif/Luminar.gif" max-height="500">
 
 ## Features
 
