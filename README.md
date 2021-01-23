@@ -1,19 +1,19 @@
 # Luminar
-A realtime video Chat app using nodejs, socket.io and webRTC
+
 <p align="center">
-  <img src="https://github.com/samiksha-patil/Luminar/blob/master/public/luminar_logo.jpeg" alt="Logo" height="100">
+  <img src="https://github.com/samiksha-patil/Luminar/blob/master/public/luminar_logo.svg" height="100">
 
   <p align="center">
     A realtime video Chat app using nodejs, socket.io and webRTC
     <br />
-    <a href="https://github.com/samiksha-patil/book_ecommerce"><strong>Explore the docs »</strong></a>
+     <a href="https://lumiar-video-chat-app.herokuapp.com/"><strong>View Demo »</strong></a>
     <br />
     <br />
-    <a href="https://lumiar-video-chat-app.herokuapp.com/">View Demo</a>
+     <a href="https://github.com/samiksha-patil/Luminar/issues">Request Feature</a>
     ·
     <a href="https://github.com/samiksha-patil/Luminar/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/samiksha-patil/Luminar/issues">Request Feature</a>
+    
+   
   </p>
 </p>
 
