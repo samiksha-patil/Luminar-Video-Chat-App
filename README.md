@@ -45,8 +45,6 @@ https://lumiar-video-chat-app.herokuapp.com/
 - jQuery
 - Javascript
 
-## Show your support
-Give a :star: if you like this project
 ## Developers
 * <a href="https://github.com/Sakshipatil16"><b>Sakshi Patil</b></a> - Full Stack
 * <a href="https://github.com/samiksha-patil/"><b>Samiksha Patil</b></a> - Full Stack
